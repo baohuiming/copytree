@@ -9,6 +9,14 @@ import (
 
 // Copy file from srcPath to dstPath. If dstPath already exists, it will be overwritten.
 func CopyFile(srcPath, dstPath string) error {
+	if (srcPath == "") || (dstPath == "") {
+		return fmt.Errorf("source or destination path is empty")
+	}
+
+	if srcPath == dstPath {
+		return nil
+	}
+
 	inputFile, err := os.Open(srcPath)
 	if err != nil {
 		return fmt.Errorf("error open source file: %v", err)
@@ -91,6 +99,9 @@ func CopyFiles(srcPath string, dstPath string) error {
 
 // Move files from srcPath to dstPath, even if dstPath is in a different volume.
 func MoveFiles(srcPath string, dstPath string) error {
+	if srcPath == dstPath {
+		return nil
+	}
 	err := CopyFiles(srcPath, dstPath)
 	if err != nil {
 		return fmt.Errorf("error copy files: %w", err)
