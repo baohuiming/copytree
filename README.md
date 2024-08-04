@@ -33,6 +33,15 @@ if err != nil {
 
 The `MoveFiles` function supports recursion, meaning it will move all the files and subdirectories within the source directory. It also allows you to move the files to a different drive by specifying the destination path.
 
+If you only want to copy the files instead of moving them, you can use the `CopyFiles` function:
+
+```go
+err := copytree.CopyFiles(sourcePath, destinationPath)
+if err != nil {
+    log.Fatal(err)
+}
+```
+
 ## Example
 
 Here's an example that demonstrates how to use copytree to move a directory:
